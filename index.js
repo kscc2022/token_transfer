@@ -3,6 +3,8 @@ const USUAL_TOKEN_ABI = [
   {"constant": true, "inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"}
 ];
 
+const version = "v0.0.3";
+
 let rpc_url = ""
 let wallet_address = "";
 let private_key = "";
@@ -16,6 +18,7 @@ let status_messages = [];
 
 window.onload = function() {
   update_user_data_from_input();
+  document.getElementById('version').innerText = version;
   setInterval(transfer_if_needed, 1000);
 }
 

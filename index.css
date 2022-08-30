@@ -6,6 +6,11 @@ body {
   background: #f0f0f0;
 }
 
+h1 span {
+  font-size: 0.7em;
+  color:  #999;
+}
+
 div {
   margin: 10px 0;
 }
