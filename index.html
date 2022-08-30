@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+    <script type="text/javascript" src="./index.js"></script>
+    <link href='index.css' rel='stylesheet'>
+  </head>
+  <body>
+
+    <h1>Token Transfer</h1>
+
+    <h2>Input</h2>
+    <div>
+      <label>RPC URL</label>
+      <input type="text" id="rpc_url" value="https://polygon-rpc.com/">
+    </div>
+
+    <div>
+      <label>TOKEN ADDRESS</label>
+      <input type="text" id="token_address" value="0x">
+    </div>
+
+    <div>
+      <label>PRIVATE KEY</label>
+      <input type="text" id="private_key" value="">
+    </div>
+
+    <dvi>
+      <label>WALLET ADDRESS</label>
+      <input type="text" id="wallet_address" readonly value="0x">
+    </div>
+
+    <div>
+      <label>TO ADDRESS</label>
+      <input type="text" id="to_address" value="0x">
+    </div>
+
+    <div>
+      <label>Gas Price (gwei)</label>
+      <input type="text" id="gas_price" value="auto">
+    </div>
+
+
+    <h2>SWITCH</h2>
+    <div>
+      <label>BOT</label>
+      <button id="toggle_button" onclick="toggle_transfer_switch()">Off</button>
+    </div>
+
+    <h2>LOG</h2>
+    <div id="status_message"></div>
+
+  </body>
+</html>
