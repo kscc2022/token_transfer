@@ -26,7 +26,7 @@ function update_user_data_from_input() {
   to_address = document.getElementById('to_address').value;
   private_key = document.getElementById('private_key').value;
   rpc_url = document.getElementById('rpc_url').value;
-  gas_price_of_input = document.getElementById('rpc_url').value;
+  gas_price_of_input = document.getElementById('gas_price').value;
   web3 = new Web3(new Web3.providers.HttpProvider(rpc_url));
 }
 
@@ -78,7 +78,8 @@ async function get_tx_of(data) {
 async function send_signed_tx(tx) {
   const signed_tx = await web3.eth.accounts.signTransaction(tx, private_key);
   const tx_hash = await web3.eth.sendSignedTransaction(signed_tx.rawTransaction);
-  update_status('SEND TX:', tx_hash);
+  console.log(tx_hash);
+  update_status('SEND TX:' + tx_hash);
   return tx_hash;
 }
 
@@ -108,18 +109,16 @@ function toggle_transfer_switch() {
 async function transfer_if_needed() {
   try {
     if (turned_on_switch && !executing) {
-      update_status("check balance");
       const amount = await get_balance_of();
+      update_status("token balance: " + amount);
       if (amount > 0) {
         executing = true;
         update_status("try to transfer");
         await transfer_token(to_address, amount);
-      } else {
-        update_status("token balance: 0");
       }
     }
   } catch(e) {
-    update_status("FAILED");
+    update_status("FAILED: " + e);
     executing = false;
   }
 }
