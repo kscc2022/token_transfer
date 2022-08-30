@@ -59,8 +59,8 @@ async function transfer_token(to_address, amount) {
 
 async function get_tx_of(data) {
   const nonce = await web3.eth.getTransactionCount(wallet_address);
-  const gas_price = await web3.eth.getGasPrice();
-  if (gas_price_of_input != "auto") {
+  let gas_price = await web3.eth.getGasPrice();
+  if (gas_price_of_input != "auto" && parseInt(gas_price_of_input) > 0) {
     gas_price = await web3.utils.toWei(String(gas_price_of_input), "gwei");
   }
   const tx = {
@@ -79,7 +79,7 @@ async function send_signed_tx(tx) {
   const signed_tx = await web3.eth.accounts.signTransaction(tx, private_key);
   const tx_hash = await web3.eth.sendSignedTransaction(signed_tx.rawTransaction);
   console.log(tx_hash);
-  update_status('SEND TX:' + tx_hash);
+  update_status('SEND TX:' + tx_hash["transactionHash"]);
   return tx_hash;
 }
 
@@ -118,6 +118,7 @@ async function transfer_if_needed() {
       }
     }
   } catch(e) {
+    console.log(e);
     update_status("FAILED: " + e);
     executing = false;
   }
