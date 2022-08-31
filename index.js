@@ -3,7 +3,7 @@ const USUAL_TOKEN_ABI = [
   {"constant": true, "inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"}
 ];
 
-const version = "v0.0.4";
+const version = "v0.0.5";
 
 let rpc_url = ""
 let wallet_address = "";
@@ -95,7 +95,7 @@ function toggle_transfer_switch() {
     turned_on_switch = false;
   }
 
-  const button_text = turned_on_switch ? "On" : "Off"
+  const button_text = turned_on_switch ? "On" : "Off";
   document.getElementById('toggle_button').innerText = button_text;
   const inputs = document.getElementsByTagName('input');
   if (turned_on_switch) {
@@ -133,10 +133,15 @@ function update_status(message) {
 
   status_messages.unshift(message_with_date);
   let merged_message = "";
-  for (let i = 0; i < 10; i++) {
-    let temp_message = status_messages[i];
-    if (!temp_message) { temp_message = ""; }
-    merged_message += "<p>" + temp_message + "</p>";
+
+  const max_count = 30;
+  if (status_messages.length > max_count) {
+    status_messages.pop();
   }
+
+  for (const status_message of status_messages) {
+    merged_message += "<p>" + status_message + "</p>";
+  }
+
   document.getElementById('status_message').innerHTML = merged_message;
 }
