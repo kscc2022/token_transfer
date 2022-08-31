@@ -3,7 +3,7 @@ const USUAL_TOKEN_ABI = [
   {"constant": true, "inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"}
 ];
 
-const version = "v0.0.5";
+const version = "v0.0.6";
 
 let rpc_url = ""
 let wallet_address = "";
