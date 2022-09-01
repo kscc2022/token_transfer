@@ -75,9 +75,11 @@ async function get_tx_of(data) {
     gas_price = parseInt(gas_price * gas_price_multiplier / 100) ;
   }
 
-  const gas_price_limit_wei = await web3.utils.toWei(String(gas_price_limit), "gwei");
-  if (gas_price > gas_price_limit_wei && gas_price_limit_wei > 0) {
-    gas_price = gas_price_limit_wei;
+  if (gas_price_limit > 0) {
+    const gas_price_limit_wei = await web3.utils.toWei(String(gas_price_limit), "gwei");
+    if (gas_price > gas_price_limit_wei) {
+      gas_price = gas_price_limit_wei;
+    }
   }
   update_status("Gas Price is " + gas_price);
 
