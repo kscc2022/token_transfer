@@ -3,7 +3,7 @@ const USUAL_TOKEN_ABI = [
   {"constant": true, "inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"}
 ];
 
-const version = "v0.0.7";
+const version = "v0.0.8";
 
 let rpc_url = ""
 let wallet_address = "";
@@ -11,6 +11,8 @@ let private_key = "";
 let token_address = "";
 let to_address = "";
 let gas_price_of_input = "";
+let gas_price_multiplier = "";
+let gas_price_limit = "";
 let web3;
 let turned_on_switch = false;
 let executing = false;
@@ -30,6 +32,8 @@ function update_user_data_from_input() {
   private_key = document.getElementById('private_key').value;
   rpc_url = document.getElementById('rpc_url').value;
   gas_price_of_input = document.getElementById('gas_price').value;
+  gas_price_multiplier = parseInt(document.getElementById('gas_price_multiplier').value);
+  gas_price_limit = parseInt(document.getElementById('gas_price_limit').value);
   web3 = new Web3(new Web3.providers.HttpProvider(rpc_url));
 }
 
@@ -66,6 +70,17 @@ async function get_tx_of(data) {
   if (gas_price_of_input != "auto" && parseInt(gas_price_of_input) > 0) {
     gas_price = await web3.utils.toWei(String(gas_price_of_input), "gwei");
   }
+
+  if (gas_price_multiplier > 0) {
+    gas_price = parseInt(gas_price * gas_price_multiplier / 100) ;
+  }
+
+  const gas_price_limit_wei = await web3.utils.toWei(String(gas_price_limit), "gwei");
+  if (gas_price > gas_price_limit_wei && gas_price_limit_wei > 0) {
+    gas_price = gas_price_limit_wei;
+  }
+  update_status("Gas Price is " + gas_price);
+
   const tx = {
     'from': wallet_address,
     'to': token_address,
