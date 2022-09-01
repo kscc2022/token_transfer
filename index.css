@@ -16,14 +16,14 @@ div {
 }
 
 label {
-  width: 180px;
+  width: 220px;
   display: inline-block;
   font-weight: bolder;
   color: #333;
 }
 
 input {
-  width: 600px;
+  width: 560px;
   height: 20px;
   padding: 8px;
   color: #666;
