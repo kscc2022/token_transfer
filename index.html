@@ -6,7 +6,7 @@
     <meta http-equiv='expires' content='0'>
     <meta http-equiv="Cache-Control" content="no-store">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
-    <script type="text/javascript" src="./index.js?version=7"></script>
+    <script type="text/javascript" src="./index.js?version=8"></script>
     <link href='index.css' rel='stylesheet'>
   </head>
   <body>
@@ -39,11 +39,21 @@
       <input type="text" id="to_address" value="" placeholder="送金先ウォレットのアドレス（e.g. 0x0000...）">
     </div>
 
+    <h2>GAS</h2>
     <div>
-      <label>Gas Price (gwei)</label>
+      <label>Gas Price (Gwei)</label>
       <input type="text" id="gas_price" value="auto" placeholder="auto か空欄で自動取得">
     </div>
 
+    <div>
+      <label>Multiplier (%）</label>
+      <input type="text" id="gas_price_multiplier" value="100" placeholder="Gas Price にこの倍率をかけたものをガス代とします。（e.g. 100）">
+    </div>
+
+    <div>
+      <label>Gas Price Limit (Gwei）</label>
+      <input type="text" id="gas_price_limit" value="1000" placeholder="この価格をガス代上限とする（e.g. 1000）">
+    </div>
 
     <h2>SWITCH</h2>
     <div>
